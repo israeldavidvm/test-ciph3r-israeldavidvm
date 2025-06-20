@@ -32,6 +32,8 @@ Con api-productos, podrás garantizar una gestión de productos sólida, eficien
 
 ## Características a implementar
 
+Calculo automatico del precio en otras monedas para facilitar el uso de la api, etc.
+
 ## Uso
 
 ### Requisitos 
