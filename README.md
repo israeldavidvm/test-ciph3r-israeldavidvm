@@ -43,8 +43,12 @@ Tener instalado
 
 ### Instalacion 
 
+Ejecuta el comando para instalar laravel sail, sactum y las demas depencias
+
+composer install  
+
 #### Docker
-El proceso de instalacion esta gestionado por medio de docker-compose.yml
+El proceso de instalacion esta gestionado por laravel sail mas concretamente por medio de docker-compose.yml
 
 Eres libre de modificar dicho archivo a tu gusto
 
@@ -77,6 +81,9 @@ DB_PASSWORD=<password>
 Ejecuta el comando
 
 sail up
+
+#### Ejecuta migraciones
+sail artisan migrate:refresh --seed
 
 
 ### Accede a la documentacion de la api
