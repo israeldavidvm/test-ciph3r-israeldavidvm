@@ -1,0 +1,524 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+CAUTION: Do not modify this file unless you know what you are doing.
+ Unexpected results may occur if the code is changed deliberately.
+-->
+<dbmodel pgmodeler-ver="1.1.2" use-changelog="false" max-obj-count="15"
+	 last-position="133,-24" last-zoom="0.8" scene-rect="-8,-30,1578.8,1218.32"
+	 default-schema="public" default-owner="postgres"
+	 layers="Default layer"
+	 active-layers="0"
+	 layer-name-colors="#000000"
+	 layer-rect-colors="#b4b4b4"
+	 show-layer-names="false" show-layer-rects="false">
+<role name="israeldavidvm"
+ superuser="true"
+ inherit="true"
+ login="true"
+ password="********">
+</role>
+
+<database name="israeldavidvm" encoding="UTF8" lc-collate="es_VE.UTF-8" lc-ctype="es_VE.UTF-8" is-template="false" allow-conns="true">
+	<role name="israeldavidvm"/>
+	<tablespace name="pg_default"/>
+</database>
+
+<schema name="public" layers="0" rect-visible="true" fill-color="#e1e1e1" name-color="#000000" sql-disabled="true">
+</schema>
+
+<sequence name="migrations_id_seq" cycle="false" start="1" increment="1" min-value="1" max-value="2147483647" cache="1">
+	<schema name="public"/>
+	<role name="israeldavidvm"/>
+</sequence>
+
+<table name="migrations" layers="0" collapse-mode="2" max-obj-count="3" z-value="0">
+	<schema name="public"/>
+	<role name="israeldavidvm"/>
+	<position x="880" y="820"/>
+	<column name="id" not-null="true" sequence="public.migrations_id_seq">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="migration" not-null="true">
+		<type name="character varying" length="255"/>
+	</column>
+	<column name="batch" not-null="true">
+		<type name="integer" length="0"/>
+	</column>
+	<constraint name="migrations_pkey" type="pk-constr" table="public.migrations">
+		<columns names="id" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<sequence name="users_id_seq" cycle="false" start="1" increment="1" min-value="1" max-value="9223372036854775807" cache="1">
+	<schema name="public"/>
+	<role name="israeldavidvm"/>
+</sequence>
+
+<table name="users" layers="0" collapse-mode="2" max-obj-count="9" z-value="0">
+	<schema name="public"/>
+	<role name="israeldavidvm"/>
+	<position x="260" y="100"/>
+	<column name="id" not-null="true" sequence="public.users_id_seq">
+		<type name="bigint" length="0"/>
+	</column>
+	<column name="name" not-null="true">
+		<type name="character varying" length="255"/>
+	</column>
+	<column name="email" not-null="true">
+		<type name="character varying" length="255"/>
+	</column>
+	<column name="email_verified_at">
+		<type name="timestamp" length="0" precision="0"/>
+	</column>
+	<column name="password" not-null="true">
+		<type name="character varying" length="255"/>
+	</column>
+	<column name="remember_token">
+		<type name="character varying" length="100"/>
+	</column>
+	<column name="created_at">
+		<type name="timestamp" length="0" precision="0"/>
+	</column>
+	<column name="updated_at">
+		<type name="timestamp" length="0" precision="0"/>
+	</column>
+	<constraint name="users_pkey" type="pk-constr" table="public.users">
+		<columns names="id" ref-type="src-columns"/>
+	</constraint>
+	<constraint name="users_email_unique" type="uq-constr" table="public.users">
+		<columns names="email" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="password_reset_tokens" layers="0" collapse-mode="2" max-obj-count="3" z-value="0">
+	<schema name="public"/>
+	<role name="israeldavidvm"/>
+	<position x="560" y="820"/>
+	<column name="email" not-null="true">
+		<type name="character varying" length="255"/>
+	</column>
+	<column name="token" not-null="true">
+		<type name="character varying" length="255"/>
+	</column>
+	<column name="created_at">
+		<type name="timestamp" length="0" precision="0"/>
+	</column>
+	<constraint name="password_reset_tokens_pkey" type="pk-constr" table="public.password_reset_tokens">
+		<columns names="email" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="sessions" layers="0" collapse-mode="2" max-obj-count="7" z-value="0">
+	<schema name="public"/>
+	<role name="israeldavidvm"/>
+	<position x="40" y="540"/>
+	<column name="id" not-null="true">
+		<type name="character varying" length="255"/>
+	</column>
+	<column name="user_id">
+		<type name="bigint" length="0"/>
+	</column>
+	<column name="ip_address">
+		<type name="character varying" length="45"/>
+	</column>
+	<column name="user_agent">
+		<type name="text" length="0"/>
+	</column>
+	<column name="payload" not-null="true">
+		<type name="text" length="0"/>
+	</column>
+	<column name="last_activity" not-null="true">
+		<type name="integer" length="0"/>
+	</column>
+	<constraint name="sessions_pkey" type="pk-constr" table="public.sessions">
+		<columns names="id" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<index name="sessions_user_id_index" table="public.sessions"
+	 concurrent="false" unique="false" fast-update="false" buffering="false" nulls-not-distinct="false"
+	 index-type="btree" factor="90">
+		<idxelement use-sorting="false">
+			<column name="user_id"/>
+		</idxelement>
+</index>
+
+<index name="sessions_last_activity_index" table="public.sessions"
+	 concurrent="false" unique="false" fast-update="false" buffering="false" nulls-not-distinct="false"
+	 index-type="btree" factor="90">
+		<idxelement use-sorting="false">
+			<column name="last_activity"/>
+		</idxelement>
+</index>
+
+<table name="cache" layers="0" collapse-mode="2" max-obj-count="3" z-value="0">
+	<schema name="public"/>
+	<role name="israeldavidvm"/>
+	<position x="160" y="880"/>
+	<column name="key" not-null="true">
+		<type name="character varying" length="255"/>
+	</column>
+	<column name="value" not-null="true">
+		<type name="text" length="0"/>
+	</column>
+	<column name="expiration" not-null="true">
+		<type name="integer" length="0"/>
+	</column>
+	<constraint name="cache_pkey" type="pk-constr" table="public.cache">
+		<columns names="key" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="cache_locks" layers="0" collapse-mode="2" max-obj-count="3" z-value="0">
+	<schema name="public"/>
+	<role name="israeldavidvm"/>
+	<position x="360" y="860"/>
+	<column name="key" not-null="true">
+		<type name="character varying" length="255"/>
+	</column>
+	<column name="owner" not-null="true">
+		<type name="character varying" length="255"/>
+	</column>
+	<column name="expiration" not-null="true">
+		<type name="integer" length="0"/>
+	</column>
+	<constraint name="cache_locks_pkey" type="pk-constr" table="public.cache_locks">
+		<columns names="key" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<sequence name="jobs_id_seq" cycle="false" start="1" increment="1" min-value="1" max-value="9223372036854775807" cache="1">
+	<schema name="public"/>
+	<role name="israeldavidvm"/>
+</sequence>
+
+<table name="jobs" layers="0" collapse-mode="2" max-obj-count="8" z-value="0">
+	<schema name="public"/>
+	<role name="israeldavidvm"/>
+	<position x="320" y="520"/>
+	<column name="id" not-null="true" sequence="public.jobs_id_seq">
+		<type name="bigint" length="0"/>
+	</column>
+	<column name="queue" not-null="true">
+		<type name="character varying" length="255"/>
+	</column>
+	<column name="payload" not-null="true">
+		<type name="text" length="0"/>
+	</column>
+	<column name="attempts" not-null="true">
+		<type name="smallint" length="0"/>
+	</column>
+	<column name="reserved_at">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="available_at" not-null="true">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="created_at" not-null="true">
+		<type name="integer" length="0"/>
+	</column>
+	<constraint name="jobs_pkey" type="pk-constr" table="public.jobs">
+		<columns names="id" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<index name="jobs_queue_index" table="public.jobs"
+	 concurrent="false" unique="false" fast-update="false" buffering="false" nulls-not-distinct="false"
+	 index-type="btree" factor="90">
+		<idxelement use-sorting="false">
+			<column name="queue"/>
+		</idxelement>
+</index>
+
+<table name="job_batches" layers="0" collapse-mode="2" max-obj-count="12" z-value="0">
+	<schema name="public"/>
+	<role name="israeldavidvm"/>
+	<position x="560" y="460"/>
+	<column name="id" not-null="true">
+		<type name="character varying" length="255"/>
+	</column>
+	<column name="name" not-null="true">
+		<type name="character varying" length="255"/>
+	</column>
+	<column name="total_jobs" not-null="true">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="pending_jobs" not-null="true">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="failed_jobs" not-null="true">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="failed_job_ids" not-null="true">
+		<type name="text" length="0"/>
+	</column>
+	<column name="options">
+		<type name="text" length="0"/>
+	</column>
+	<column name="cancelled_at">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="created_at" not-null="true">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="finished_at">
+		<type name="integer" length="0"/>
+	</column>
+	<constraint name="job_batches_pkey" type="pk-constr" table="public.job_batches">
+		<columns names="id" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<sequence name="failed_jobs_id_seq" cycle="false" start="1" increment="1" min-value="1" max-value="9223372036854775807" cache="1">
+	<schema name="public"/>
+	<role name="israeldavidvm"/>
+</sequence>
+
+<table name="failed_jobs" layers="0" collapse-mode="2" max-obj-count="8" z-value="0">
+	<schema name="public"/>
+	<role name="israeldavidvm"/>
+	<position x="780" y="460"/>
+	<column name="id" not-null="true" sequence="public.failed_jobs_id_seq">
+		<type name="bigint" length="0"/>
+	</column>
+	<column name="uuid" not-null="true">
+		<type name="character varying" length="255"/>
+	</column>
+	<column name="connection" not-null="true">
+		<type name="text" length="0"/>
+	</column>
+	<column name="queue" not-null="true">
+		<type name="text" length="0"/>
+	</column>
+	<column name="payload" not-null="true">
+		<type name="text" length="0"/>
+	</column>
+	<column name="exception" not-null="true">
+		<type name="text" length="0"/>
+	</column>
+	<column name="failed_at" not-null="true" default-value="CURRENT_TIMESTAMP">
+		<type name="timestamp" length="0" precision="0"/>
+	</column>
+	<constraint name="failed_jobs_pkey" type="pk-constr" table="public.failed_jobs">
+		<columns names="id" ref-type="src-columns"/>
+	</constraint>
+	<constraint name="failed_jobs_uuid_unique" type="uq-constr" table="public.failed_jobs">
+		<columns names="uuid" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<sequence name="currencies_id_seq" cycle="false" start="1" increment="1" min-value="1" max-value="9223372036854775807" cache="1">
+	<schema name="public"/>
+	<role name="israeldavidvm"/>
+</sequence>
+
+<table name="currencies" layers="0" collapse-mode="2" max-obj-count="7" z-value="0">
+	<schema name="public"/>
+	<role name="israeldavidvm"/>
+	<comment> <![CDATA[Campo Tipo Descripción
+id integer Identificador único de la divisa
+name string Nombre de la divisa
+symbol string Símbolo de la divisa
+exchange_rate decimal Tasa de cambio de la divisa]]> </comment>
+	<position x="1100" y="80"/>
+	<column name="id" not-null="true" sequence="public.currencies_id_seq">
+		<type name="bigint" length="0"/>
+	</column>
+	<column name="name" not-null="true">
+		<type name="text" length="255"/>
+	</column>
+	<column name="symbol" not-null="true">
+		<type name="text" length="255"/>
+	</column>
+	<column name="exchange_rate" not-null="true">
+		<type name="numeric" length="10" precision="2"/>
+	</column>
+	<column name="created_at">
+		<type name="timestamp" length="0" precision="0"/>
+	</column>
+	<column name="updated_at">
+		<type name="timestamp" length="0" precision="0"/>
+	</column>
+	<constraint name="currencies_pk" type="pk-constr" table="public.currencies">
+		<columns names="id" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<sequence name="products_id_seq" cycle="false" start="1" increment="1" min-value="1" max-value="9223372036854775807" cache="1">
+	<schema name="public"/>
+	<role name="israeldavidvm"/>
+</sequence>
+
+<table name="products" layers="0" collapse-mode="2" max-obj-count="10" z-value="0">
+	<schema name="public"/>
+	<role name="israeldavidvm"/>
+	<comment> <![CDATA[Campo Tipo Description
+id integer Identificador único del producto
+name string Nombre del producto
+description string Descripción del producto
+price decimal Precio del producto en la divisa base
+currency_id integer Identificador de la divisa base
+tax_cost decimal Costo de impuestos del producto
+manufacturing_cost decimal Costo de fabricación del producto]]> </comment>
+	<position x="500" y="40"/>
+	<column name="id" not-null="true" sequence="public.products_id_seq">
+		<type name="bigint" length="0"/>
+	</column>
+	<column name="created_at">
+		<type name="timestamp" length="0" precision="0"/>
+	</column>
+	<column name="updated_at">
+		<type name="timestamp" length="0" precision="0"/>
+	</column>
+	<column name="name" not-null="true">
+		<type name="text" length="0"/>
+	</column>
+	<column name="description">
+		<type name="text" length="0"/>
+	</column>
+	<column name="price">
+		<type name="double precision" length="0"/>
+	</column>
+	<column name="tax_cost">
+		<type name="double precision" length="0"/>
+	</column>
+	<column name="manufacturing_cost">
+		<type name="double precision" length="0"/>
+	</column>
+	<column name="currency_id" not-null="true">
+		<type name="bigint" length="0"/>
+	</column>
+	<constraint name="products_pk" type="pk-constr" table="public.products">
+		<columns names="id" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<sequence name="product_prices_id_seq" cycle="false" start="1" increment="1" min-value="1" max-value="9223372036854775807" cache="1">
+	<schema name="public"/>
+	<role name="israeldavidvm"/>
+</sequence>
+
+<table name="product_prices" layers="0" collapse-mode="2" max-obj-count="7" z-value="0">
+	<schema name="public"/>
+	<role name="israeldavidvm"/>
+	<comment> <![CDATA[Campo Tipo Descripción
+id integer Identificador único del precio del producto
+product_id integer Identificador del producto
+currency_id integer Identificador de la divisa
+price decimal Precio del producto en la divisa especificada]]> </comment>
+	<position x="860" y="200"/>
+	<column name="id" not-null="true" sequence="public.product_prices_id_seq">
+		<type name="bigint" length="0"/>
+	</column>
+	<column name="created_at">
+		<type name="timestamp" length="0" precision="0"/>
+	</column>
+	<column name="updated_at">
+		<type name="timestamp" length="0" precision="0"/>
+	</column>
+	<column name="product_id" not-null="true">
+		<type name="bigint" length="0"/>
+	</column>
+	<column name="currency_id" not-null="true">
+		<type name="bigint" length="0"/>
+	</column>
+	<column name="price" not-null="true">
+		<type name="double precision" length="0"/>
+	</column>
+	<constraint name="product_prices_pk" type="pk-constr" table="public.product_prices">
+		<columns names="id" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<sequence name="personal_access_tokens_id_seq" cycle="false" start="1" increment="1" min-value="1" max-value="9223372036854775807" cache="1">
+	<schema name="public"/>
+	<role name="israeldavidvm"/>
+</sequence>
+
+<table name="personal_access_tokens" layers="0" collapse-mode="2" max-obj-count="12" z-value="0">
+	<schema name="public"/>
+	<role name="israeldavidvm"/>
+	<position x="1100" y="440"/>
+	<column name="id" not-null="true" sequence="public.personal_access_tokens_id_seq">
+		<type name="bigint" length="0"/>
+	</column>
+	<column name="tokenable_type" not-null="true">
+		<type name="character varying" length="255"/>
+	</column>
+	<column name="tokenable_id" not-null="true">
+		<type name="bigint" length="0"/>
+	</column>
+	<column name="name" not-null="true">
+		<type name="character varying" length="255"/>
+	</column>
+	<column name="token" not-null="true">
+		<type name="character varying" length="64"/>
+	</column>
+	<column name="abilities">
+		<type name="text" length="0"/>
+	</column>
+	<column name="last_used_at">
+		<type name="timestamp" length="0" precision="0"/>
+	</column>
+	<column name="expires_at">
+		<type name="timestamp" length="0" precision="0"/>
+	</column>
+	<column name="created_at">
+		<type name="timestamp" length="0" precision="0"/>
+	</column>
+	<column name="updated_at">
+		<type name="timestamp" length="0" precision="0"/>
+	</column>
+	<constraint name="personal_access_tokens_pkey" type="pk-constr" table="public.personal_access_tokens">
+		<columns names="id" ref-type="src-columns"/>
+	</constraint>
+	<constraint name="personal_access_tokens_token_unique" type="uq-constr" table="public.personal_access_tokens">
+		<columns names="token" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<index name="personal_access_tokens_tokenable_type_tokenable_id_index" table="public.personal_access_tokens"
+	 concurrent="false" unique="false" fast-update="false" buffering="false" nulls-not-distinct="false"
+	 index-type="btree" factor="90">
+		<idxelement use-sorting="false">
+			<column name="tokenable_type"/>
+		</idxelement>
+		<idxelement use-sorting="false">
+			<column name="tokenable_id"/>
+		</idxelement>
+</index>
+
+<constraint name="currency_id_fk" type="fk-constr" comparison-type="MATCH SIMPLE"
+	 upd-action="CASCADE" del-action="SET NULL" ref-table="public.currencies" table="public.products">
+	<columns names="currency_id" ref-type="src-columns"/>
+	<columns names="id" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="currency_id_fk" type="fk-constr" comparison-type="MATCH SIMPLE"
+	 upd-action="CASCADE" del-action="CASCADE" ref-table="public.currencies" table="public.product_prices">
+	<columns names="currency_id" ref-type="src-columns"/>
+	<columns names="id" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="product_id_fk" type="fk-constr" comparison-type="MATCH SIMPLE"
+	 upd-action="CASCADE" del-action="CASCADE" ref-table="public.products" table="public.product_prices">
+	<columns names="product_id" ref-type="src-columns"/>
+	<columns names="id" ref-type="dst-columns"/>
+</constraint>
+
+<relationship name="rel_products_currencies" type="relfk" layers="0"
+	 src-table="public.products"
+	 dst-table="public.currencies" reference-fk="currency_id_fk"
+	 src-required="false" dst-required="true"/>
+
+<relationship name="rel_product_prices_currencies" type="relfk" layers="0"
+	 src-table="public.product_prices"
+	 dst-table="public.currencies" reference-fk="currency_id_fk"
+	 src-required="false" dst-required="true"/>
+
+<relationship name="rel_product_prices_products" type="relfk" layers="0"
+	 src-table="public.product_prices"
+	 dst-table="public.products" reference-fk="product_id_fk"
+	 src-required="false" dst-required="true"/>
+
+</dbmodel>
