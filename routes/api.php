@@ -5,6 +5,8 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\Api\V1\ProductController as ProductControllerV1;
 use App\Http\Controllers\Api\V1\AuthController as AuthControllerV1;
+use App\Http\Controllers\Api\V1\SearchController AS SearchController;
+use Illuminate\Support\Facades\Log;
 
 
 /*
@@ -20,6 +22,8 @@ use App\Http\Controllers\Api\V1\AuthController as AuthControllerV1;
 
 
 Route::prefix('/v1')->group(function () {
+
+    Route::get('/search/products', [SearchController::class, 'products']);
 
     #Route::apiResource('', TaxnomiesController::class);
 

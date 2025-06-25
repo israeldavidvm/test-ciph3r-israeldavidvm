@@ -10,9 +10,11 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Validator;
 use Exception;
 
+use Laravel\Scout\Searchable;
+
 class Product extends Model
 {
-    use \Israeldavidvm\EloquentTraits\AttributesTrait;
+    use Searchable,\Israeldavidvm\EloquentTraits\AttributesTrait;
 
 	protected $table = 'products';
 
@@ -31,6 +33,21 @@ class Product extends Model
 		'manufacturing_cost',
 		'currency_id'
 	];
+
+    public function toSearchableArray()
+    {
+        return [
+            'id' => (string) $this->id,
+            'name' => $this->name,
+            'description' => $this->description,
+            'created_at' => $this->created_at ? $this->created_at->timestamp : null,
+            'updated_at' => $this->updated_at ? $this->updated_at->timestamp : null,
+            'currency_id' => (int) $this->currency_id,
+            'tax_cost' => (float) $this->tax_cost,
+            'manufacturing_cost' => (float) $this->manufacturing_cost,
+            'price' => (float) $this->price,
+        ];
+    }
 
 	public function currency()
 	{
